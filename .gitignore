@@ -1,0 +1,26 @@
+build/
+*.o
+*.out
+a.out
+
+# Erlang
+*.beam
+ebin/
+_build/
+erl_crash.dump
+.rebar3/
+deps/
+*.plt
+*.pltx
+
+# Logs
+*.log
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+*~
+*.swp
+*.swo
+tags
