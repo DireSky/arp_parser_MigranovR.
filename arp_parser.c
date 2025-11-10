@@ -26,8 +26,7 @@ uint8_t test_arp_packet[] = {
 int parse_arp(const uint8_t *data, size_t len, struct arp_packet *packet) {
     // Ваша реализация здесь
     if (!data || !packet) return -1; //проверка на указатели 
-    if (len < 28) return -2; //проверка на длину
-    uint16_t tmp16;
+    if (len != 28) return -2; //проверка на длину
     packet->htype = (uint16_t)((data[0] << 8) | data[1]);
     packet->ptype = (uint16_t)((data[2] << 8) | data[3]);
     packet->hsize = data[4];
@@ -37,8 +36,8 @@ int parse_arp(const uint8_t *data, size_t len, struct arp_packet *packet) {
     if (packet->hsize != 6 || packet->psize != 4) return -3; //на случай если нам прислали другую структуру пакета
     memcpy(packet->sha, data + 8, 6);
     memcpy(packet->spa, data + 14, 4);
-    memcpy(packet->sha, data + 18, 6);
-    memcpy(packet->spa, data + 24, 4);
+    memcpy(packet->tha, data + 18, 6);
+    memcpy(packet->tpa, data + 24, 4);
 
     return 0;
 }
